@@ -22,7 +22,7 @@ class TwoDice(EasyFrame):
         self.button = self.addButton(text="Roll", row=3, column=0, command=self.roll, columnspan=2)
         self.button.grid(sticky="NSEW")
         self.button.config(width=10)
-        self.result = self.addTextField(text="", row=4, column=0, columnspan=2, sticky="NSEW")
+        self.result = self.addLabel(text="", row=4, column=0, columnspan=2, sticky="NSEW", background="white")
         self.result.config(justify="center", font=("helvetica", 16))
         self.result["background"] = "#33c43a"
 
@@ -38,7 +38,7 @@ class TwoDice(EasyFrame):
             self.dealer_roll["foreground"] = "black"
             self.result["background"] = "green"
             self.result["foreground"] = "white"
-            self.result.setText("Player Win!")
+            self.result["text"] = "Player Win!"
             playsound("WinSound.wav", False)
             self.button.after(200, self.enable)
         elif user_num < dealer_num:
@@ -48,17 +48,17 @@ class TwoDice(EasyFrame):
             self.dealer_roll["foreground"] = "white"
             self.result["background"] = "red"
             self.result["foreground"] = "black"
-            self.result.setText("Dealer Win!")
+            self.result["text"] = "Dealer Win!"
             playsound("LoseSound.mp3", False)
             self.button.after(3800, self.enable)
         else:
-            self.result.setText("Push!")
             self.result["background"] = "white"
             self.result["foreground"] = "black"
             self.user_roll["background"] = "white"
             self.user_roll["foreground"] = "black"
             self.dealer_roll["background"] = "white"
             self.dealer_roll["foreground"] = "black"
+            self.result["text"] = "Push!"
             playsound("DrawSound.mp3", False)
             self.button.after(2000, self.enable)
         self.user_roll["text"] = (str(user_num))
